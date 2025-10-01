@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noviindus_machine_test/features/register/presentation/pages/register_screen.dart';
+import 'package:noviindus_machine_test/features/authentication/presentation/pages/register_screen.dart';
 
 class Booking {
   final String name;
@@ -342,7 +342,9 @@ class _BookingListScreenState extends State<BookingListScreen> {
         child: SafeArea(
           child: ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen(),));
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color.fromRGBO(0, 104, 55, 1),

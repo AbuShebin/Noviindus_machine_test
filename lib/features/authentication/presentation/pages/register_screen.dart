@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:noviindus_machine_test/core/common/custom_elevated_button.dart';
 import 'package:noviindus_machine_test/core/common/custom_text_form_field.dart';
+import 'package:noviindus_machine_test/features/authentication/presentation/widgets/add_treatment_custom_widget.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
   String? _selectedOption = 'Option A';
+
+  void _showCustomBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const TreatmentBottomSheet(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -227,10 +237,10 @@ class RegisterScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: h * 0.02),
+
                   CustomElevatedButton(
-                    ontap: () {
-                      print('Button clicked');
-                    },
+                    ontap: () {_showCustomBottomSheet(context);},
                     backgroundColor: Color.fromRGBO(0, 104, 55, 1),
                     textColor: Colors.white,
                     width: w,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noviindus_machine_test/features/splash_scree/presentation/pages/login_screen.dart';
+import 'package:noviindus_machine_test/features/authentication/presentation/pages/login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

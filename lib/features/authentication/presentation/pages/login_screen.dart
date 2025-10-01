@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:noviindus_machine_test/core/common/custom_text_form_field.dart';
+import 'package:noviindus_machine_test/features/authentication/presentation/provider/auth_provider.dart';
 import 'package:noviindus_machine_test/features/home/presentation/pages/home_screen.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -21,18 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
-  }
-
-  void _handleLogin() {
-    if (_formKey.currentState?.validate() ?? false) {
-      // Handle login logic here
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login functionality to be implemented')),
-      );
-      Navigator.of(
-        context,
-      ).push(MaterialPageRoute(builder: (context) => BookingListScreen()));
-    }
   }
 
   @override
@@ -114,24 +104,33 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 32),
 
                       // Login Button
-                      ElevatedButton(
-                        onPressed: _handleLogin,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(0, 104, 55, 1),
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          elevation: 0,
-                        ),
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                      Consumer<AuthProvider>(
+                        builder: (context, authProvider, child) =>
+                            ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState?.validate() == true) {
+                                  authProvider.login(_emailController.text, _passwordController.text);
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromRGBO(0, 104, 55, 1),
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                elevation: 0,
+                              ),
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
                       ),
                       const SizedBox(height: 24),
 
